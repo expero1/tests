@@ -9,7 +9,11 @@
 	<link href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+	<script src="constants.js"></script>
 	<script src="data.js"></script>
+	<script src="survey.js"></script>
+	<script src="interprete_2.js"></script>
+
 	<!-- ... -->
 	<style>
 		body {
@@ -50,10 +54,7 @@
 	<script>
 		// You can add any JavaScript code here if neededconst surveyJson = {
 
-		const survey = new Survey.Model(surveyJson);
-		document.addEventListener("DOMContentLoaded", function () {
-			survey.render(document.getElementById("surveyContainer"));
-		});
+
 	</script>
 </body>
 
