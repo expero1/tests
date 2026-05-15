@@ -5,7 +5,12 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>My Form</title>
-
+	<!-- ... -->
+	<link href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+	<script src="data.js"></script>
+	<!-- ... -->
 	<style>
 		body {
 			font-family: Arial;
@@ -36,12 +41,20 @@
 <body>
 	<div class="container">
 		<h1>My Google Form</h1>
-
-		<iframe
+		<div id="surveyContainer"></div>
+		<!-- <iframe
 			src="https://docs.google.com/forms/d/e/1FAIpQLSfoEpeddN3XaHRtXuCD9g3urVxajPlh84TvZxhyyWFL2IG1vQ/viewform?embedded=true"
-			width="640" height="880" frameborder="0" marginheight="0" marginwidth="0">Завантаження…</iframe>
-
+			width="640" height="880" frameborder="0" marginheight="0" marginwidth="0">Завантаження…</iframe> -->
+		<a href="results.html" style="display: block; text-align: center; margin-top: 20px;">Check Results</a>
 	</div>
+	<script>
+		// You can add any JavaScript code here if neededconst surveyJson = {
+
+		const survey = new Survey.Model(surveyJson);
+		document.addEventListener("DOMContentLoaded", function () {
+			survey.render(document.getElementById("surveyContainer"));
+		});
+	</script>
 </body>
 
 </html>

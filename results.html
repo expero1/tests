@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>UUID Checker</title>
+	<script src="constants.js"></script>
+	<style>
+		body {
+			font-family: Arial;
+			padding: 40px;
+		}
+
+		input {
+			padding: 10px;
+			width: 300px;
+			font-size: 16px;
+		}
+
+		button {
+			padding: 10px 15px;
+			margin-left: 10px;
+			cursor: pointer;
+		}
+
+		#result {
+			margin-top: 20px;
+			font-size: 18px;
+		}
+
+		.ok {
+			color: green;
+		}
+
+		.error {
+			color: red;
+		}
+	</style>
+</head>
+
+<body>
+	<div><a href="/">Back to Form</a></div>
+	<h2>Check your result</h2>
+
+	<input id="uuid" placeholder="Enter UUID">
+	<button onclick="check()">Check</button>
+
+	<div id="result"></div>
+
+	<script>
+
+
+
+		async function check() {
+
+			const uuid =
+				document.getElementById("uuid").value.trim();
+
+			const resultDiv =
+				document.getElementById("result");
+
+			if (!uuid) {
+				resultDiv.innerHTML =
+					"<span class='error'>Please enter UUID</span>";
+				return;
+			}
+
+			resultDiv.innerHTML = "Loading...";
+
+			try {
+				const url = API_URL + "?uuid=" + encodeURIComponent(uuid);
+				const res = await fetch(url);
+
+				const data = await res.json();
+
+				if (data.status === "ok") {
+					resultDiv.innerHTML =
+						"<span class='ok'>Result: " +
+						JSON.stringify(data.data.result, null, 2) +
+						"</span>";
+				} else {
+					resultDiv.innerHTML =
+						"<span class='error'>Not found</span>";
+				}
+
+			} catch (err) {
+
+				resultDiv.innerHTML =
+					"<span class='error'>API error</span>";
+
+				console.error(err);
+			}
+		}
+
+	</script>
+
+</body>
+
+</html>
