@@ -9,47 +9,24 @@
 	<script src="results.js"></script>
 	<script src="interprete_2.js"></script>
 	<script src="interprete_data.js"></script>
+	<link href="style.css" rel="stylesheet">
 	<style>
-		body {
-			font-family: Arial;
-			padding: 40px;
-		}
 
-		input {
-			padding: 10px;
-			width: 300px;
-			font-size: 16px;
-		}
-
-		button {
-			padding: 10px 15px;
-			margin-left: 10px;
-			cursor: pointer;
-		}
-
-		#result {
-			margin-top: 20px;
-			font-size: 18px;
-		}
-
-		.ok {
-			color: green;
-		}
-
-		.error {
-			color: red;
-		}
 	</style>
 </head>
 
 <body>
-	<div><a href="/">Назад до форми</a></div>
-	<h2>Перевірка результату</h2>
+	<div class="container">
+		<div><a href="/">Назад до форми</a></div>
+		<h2>Перевірка результату</h2>
 
-	<input id="uuid" placeholder="Введіть ваш код для доступу до результатів">
-	<button onclick="check()">Перевірити</button>
+		<input id="uuid" placeholder="Введіть ваш код для доступу до результатів">
+		<button onclick="check()">Перевірити</button>
 
-	<div id="result"></div>
+		<div id="result"></div>
+
+	</div>
+
 </body>
 
 </html>

@@ -43,17 +43,23 @@ survey.onComplete.add(async function (sender) {
     result["Згода на обробку даних"].length > 0
       ? result["Згода на обробку даних"][0]
       : false;
+  document.surveyResult = {
+    timestamp: timestamp,
+    uuid: uuid,
+    ...result,
+  };
+  console.log("Survey result to be sent:", document.surveyResult);
   const response = await fetch(API_URL + "?action=save-result", {
     method: "POST",
 
     body: JSON.stringify({
       //   action: "save-result",
-      data: {
-        uuid: uuid,
-        timestamp: timestamp,
-        ...result,
-      },
+      data: document.surveyResult,
     }),
+  }).catch((err) => {
+    console.error("Error saving survey data:", err);
+    document.getElementById("surveyContainer").innerHTML =
+      "<h2 class='error'>Помилка при відправці даних</h2><p>Збережіть дані в локальний файл та відправте командиру</p><button id='saveLocal' onclick='saveLocalData()'>Зберегти дані</button>";
   });
   const r = await response.json();
   if (r.result === "ok") {
@@ -71,6 +77,14 @@ survey.onComplete.add(async function (sender) {
   console.log("Response status:", r);
   //   console.log(result);
 });
+function saveLocalData() {
+  // const data = survey.data;
+  const timestamp = new Date().toISOString();
 
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet([document.surveyResult]);
+  XLSX.utils.book_append_sheet(wb, ws, "Survey Data");
+  XLSX.writeFile(wb, `survey-data-${timestamp}.xlsx`);
+}
 survey.onValueChanged.add(saveSurveyData);
 survey.onUIStateChanged.add(saveSurveyUIState);
