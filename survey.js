@@ -2,7 +2,7 @@ const survey = new Survey.Model();
 survey.locale = "uk";
 survey.addNavigationItem({
   id: "reset",
-  title: "Скинути відповіді",
+  title: "Очистити відповіді",
   action: () => {
     survey.clear();
     survey.currentPageNo = 0;
