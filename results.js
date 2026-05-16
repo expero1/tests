@@ -14,23 +14,24 @@ async function check() {
   try {
     const url =
       API_URL + "?uuid=" + encodeURIComponent(uuid) + "&action=get-result";
+
     const res = await fetch(url);
 
     const data = await res.json();
 
     if (data.status === "ok") {
       resultDiv.innerHTML =
-        "<span class='ok'>Result: " +
+        "<span class='ok'>Результат: " +
         generateInterpretationHTML(
-          data.data.result,
-          interpretAllScores(data.data.result, scoring, interpretation),
+          data.data,
+          interpretAllScores(data.data, scoring, interpretation),
         ) +
         "</span>";
     } else {
       resultDiv.innerHTML = "<span class='error'>Результат не знайдено</span>";
     }
   } catch (err) {
-    resultDiv.innerHTML = "<span class='error'>Помилка зчитування</span>";
+    resultDiv.innerHTML = "<span class='error'>Помилка отримання даних</span>";
 
     console.error(err);
   }

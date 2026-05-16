@@ -6,14 +6,14 @@ function calculate_dostovirnist(answers) {
 
 function calculateScores(answers, scoring) {
   let score = 0;
-  for (const question_number in scoring.yes) {
+  for (const question_number of scoring.yes) {
     questionName = rawData[question_number - 1];
     answer = answers[questionName];
     if (answer === "Так") {
       score++;
     }
   }
-  for (const question_number in scoring.no) {
+  for (const question_number of scoring.no) {
     questionName = rawData[question_number - 1];
     answer = answers[questionName];
     if (answer === "Ні") {
