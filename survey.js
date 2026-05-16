@@ -33,9 +33,16 @@ function restoreSurvey(survey) {
   }
 }
 survey.onComplete.add(async function (sender) {
+  sender.completedHtml =
+    "<h2>Відправляємо дані...</h2><p>Зачекайте, будь ласка.</p>";
   const result = sender.data;
   const uuid = crypto.randomUUID();
   const timestamp = new Date().toISOString();
+  result["Згода на обробку даних"] =
+    Array.isArray(result["Згода на обробку даних"]) &&
+    result["Згода на обробку даних"].length > 0
+      ? result["Згода на обробку даних"][0]
+      : false;
   const response = await fetch(API_URL + "?action=save-result", {
     method: "POST",
 
@@ -49,6 +56,18 @@ survey.onComplete.add(async function (sender) {
     }),
   });
   const r = await response.json();
+  if (r.result === "ok") {
+    document.getElementById("surveyContainer").innerHTML =
+      ` <div id="completedForm">
+	  <h3>Дякуємо за участь у тестуванні! Ваші відповіді успішно збережені.</h3>
+	  <p>Якщо ви хочете перевірити свій результат, будь ласка, запишіть цей код:</p> <p><strong> 
+      ${uuid}
+      </strong></p>
+	  <p>Ви можете використати цей код для перевірки результату на сторінці <a href="/results.html?uuid=${uuid}">перевірка результату</a>.</p>
+	  </div>`;
+    window.localStorage.removeItem(STORAGE_ITEM_DATA_KEY);
+    window.localStorage.removeItem(STORAGE_ITEM_UI_STATE_KEY);
+  }
   console.log("Response status:", r);
   //   console.log(result);
 });
