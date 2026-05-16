@@ -51,7 +51,7 @@ function generateInterpretationHTML(commonInfo, interpretationResults) {
     "Військове звання",
     "Прізвище, ім'я та по батькові",
     "Підрозділ",
-    "timestamp",
+    "Час заповнення",
   ];
   for (const field of common_info_fields) {
     html += `

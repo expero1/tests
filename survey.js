@@ -44,8 +44,8 @@ survey.onComplete.add(async function (sender) {
       ? result["Згода на обробку даних"][0]
       : false;
   document.surveyResult = {
-    timestamp: timestamp,
-    uuid: uuid,
+    "Час заповнення": timestamp,
+    "Ключ доступу": uuid,
     ...result,
   };
   console.log("Survey result to be sent:", document.surveyResult);
@@ -66,7 +66,7 @@ survey.onComplete.add(async function (sender) {
     document.getElementById("surveyContainer").innerHTML =
       ` <div id="completedForm">
 	  <h3>Дякуємо за участь у тестуванні! Ваші відповіді успішно збережені.</h3>
-	  <p>Якщо ви хочете перевірити свій результат, будь ласка, запишіть цей код:</p> <p><strong> 
+	  <p>Якщо ви хочете перевірити свій результат, будь ласка, запишіть цей ключ доступу:</p> <p><strong> 
       ${uuid}
       </strong></p>
 	  <p>Ви можете використати цей код для перевірки результату на сторінці <a href="/results.html?uuid=${uuid}">перевірка результату</a>.</p>
