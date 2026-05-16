@@ -32,7 +32,7 @@ function restoreSurvey(survey) {
     survey.uiState = state;
   }
 }
-survey.onComplete.add(async function (sender) {
+survey.onCompleting.add(async function (sender, options) {
   sender.completedHtml =
     "<h2>Відправляємо дані...</h2><p>Зачекайте, будь ласка.</p>";
   const result = sender.data;
@@ -49,34 +49,48 @@ survey.onComplete.add(async function (sender) {
     ...result,
   };
   console.log("Survey result to be sent:", document.surveyResult);
-  const response = await fetch(API_URL + "?action=save-result", {
-    method: "POST",
+  try {
+    const response = await fetch(API_URL + "?action=save-result", {
+      method: "POST",
 
-    body: JSON.stringify({
-      //   action: "save-result",
-      data: document.surveyResult,
-    }),
-  }).catch((err) => {
-    console.error("Error saving survey data:", err);
-    document.getElementById("surveyContainer").innerHTML =
-      "<h2 class='error'>Помилка при відправці даних</h2><p>Збережіть дані в локальний файл та відправте командиру</p><button id='saveLocal' onclick='saveLocalData()'>Зберегти дані</button>";
-  });
-  const r = await response.json();
-  if (r.result === "ok") {
-    document.getElementById("surveyContainer").innerHTML =
-      ` <div id="completedForm">
+      body: JSON.stringify({
+        //   action: "save-result",
+        data: document.surveyResult,
+      }),
+    });
+    const r = await response.json();
+    if (r.result === "ok") {
+      document.getElementById("surveyContainer").innerHTML =
+        ` <div id="completedForm">
 	  <h3>Дякуємо за участь у тестуванні! Ваші відповіді успішно збережені.</h3>
 	  <p>Якщо ви хочете перевірити свій результат, будь ласка, запишіть цей ключ доступу:</p> <p><strong> 
       ${uuid}
       </strong></p>
 	  <p>Ви можете використати цей код для перевірки результату на сторінці <a href="/results.html?uuid=${uuid}">перевірка результату</a>.</p>
 	  </div>`;
-    window.localStorage.removeItem(STORAGE_ITEM_DATA_KEY);
-    window.localStorage.removeItem(STORAGE_ITEM_UI_STATE_KEY);
+      document.getElementById("form-error-message")?.remove();
+      window.localStorage.removeItem(STORAGE_ITEM_DATA_KEY);
+      window.localStorage.removeItem(STORAGE_ITEM_UI_STATE_KEY);
+    }
+    console.log("Response status:", r);
+    //   console.log(result);
+  } catch (err) {
+    options.allow = false;
+    sender.state = "running";
+    console.error("Error saving survey data:", err);
+    document.getElementById("form-error-message")?.remove();
+    const errorElement = document.createElement("div");
+    errorElement.id = "form-error-message";
+    errorElement.classList.add("error");
+    errorElement.innerHTML =
+      "<h2>Помилка при відправці даних</h2><p>Збережіть дані в локальний файл та відправте командиру</p><button id='saveLocal' onclick='saveLocalData()'>Зберегти дані</button>";
+    document.getElementById("surveyContainer").after(errorElement);
+
+    // document.getElementById("surveyContainer").after().innerHTML =
+    //   "<h2 class='error'>Помилка при відправці даних</h2><p>Збережіть дані в локальний файл та відправте командиру</p><button id='saveLocal' onclick='saveLocalData()'>Зберегти дані</button>";
   }
-  console.log("Response status:", r);
-  //   console.log(result);
 });
+
 function saveLocalData() {
   // const data = survey.data;
   const timestamp = new Date().toISOString();
