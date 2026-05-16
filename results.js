@@ -4,11 +4,12 @@ async function check() {
   const resultDiv = document.getElementById("result");
 
   if (!uuid) {
-    resultDiv.innerHTML = "<span class='error'>Please enter UUID</span>";
+    resultDiv.innerHTML =
+      "<span class='error'>Будь ласка, введіть код для доступу до результатів</span>";
     return;
   }
 
-  resultDiv.innerHTML = "Loading...";
+  resultDiv.innerHTML = "Завантаження...";
 
   try {
     const url =
@@ -26,11 +27,20 @@ async function check() {
         ) +
         "</span>";
     } else {
-      resultDiv.innerHTML = "<span class='error'>Not found</span>";
+      resultDiv.innerHTML = "<span class='error'>Результат не знайдено</span>";
     }
   } catch (err) {
-    resultDiv.innerHTML = "<span class='error'>API error</span>";
+    resultDiv.innerHTML = "<span class='error'>Помилка зчитування</span>";
 
     console.error(err);
   }
 }
+document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("uuid") || null;
+  if (token) {
+    const a = document.getElementById("uuid");
+    a.value = token;
+    check();
+  }
+});

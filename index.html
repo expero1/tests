@@ -4,11 +4,13 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>My Form</title>
+	<title>Багаторівневий особистісний опитувальник (БОО) “Адаптивність-200”</title>
 	<!-- ... -->
 	<link href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
+	<script src="https://unpkg.com/survey-core/i18n/ukrainian.js"></script>
+
 	<script src="constants.js"></script>
 	<script src="data.js"></script>
 	<script src="survey.js"></script>
@@ -44,12 +46,22 @@
 
 <body>
 	<div class="container">
-		<h1>My Google Form</h1>
+		<h1>Багаторівневий особистісний опитувальник (БОО) “Адаптивність-200”</h1>
+		<p><b>Інструкція:</b> “Опитувальник складається з тверджень, що стосуються Вашого самопочуття, поведінки,
+			характеру,
+			інтересів і відносин в родині.</p>
+		<p>Ваше завдання полягає у тому, щоб визначити своє відношення до кожного твердження, тобто погодитися або не
+			погодитися з ним.</p>
+		<p><b>Якщо Ви погоджуєтеся з твердженням, то дайте відповідь “так”.</b></p>
+		<p><b>Якщо Ви не згодні – відповідь “ні”.</b></p>
+		<p>Правильних або неправильних відповідей тут бути не може, тому довго не замислюйтеся над питанням – давайте
+			відповідь,виходячи з того, що більше відповідає Вашому характеру або уявленню про самого себе”.</p>
+
 		<div id="surveyContainer"></div>
 		<!-- <iframe
 			src="https://docs.google.com/forms/d/e/1FAIpQLSfoEpeddN3XaHRtXuCD9g3urVxajPlh84TvZxhyyWFL2IG1vQ/viewform?embedded=true"
 			width="640" height="880" frameborder="0" marginheight="0" marginwidth="0">Завантаження…</iframe> -->
-		<a href="results.html" style="display: block; text-align: center; margin-top: 20px;">Check Results</a>
+		<a href="results.html" style="display: block; text-align: center; margin-top: 20px;">Перевірити результат</a>
 	</div>
 	<script>
 		// You can add any JavaScript code here if neededconst surveyJson = {

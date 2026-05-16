@@ -203,6 +203,11 @@ const rawData = [
 
 const surveyJson = (() => {
   let result = {
+    completedHtml: ` <div id="completedForm">
+	  <h3>Дякуємо за участь у тестуванні! Ваші відповіді успішно збережені.</h3>
+	  <p>Якщо ви хочете перевірити свій результат, будь ласка, запишіть цей код: <strong>{uuid}</strong></p>
+	  <p>Ви можете використати цей код для перевірки результату на сторінці <a href="/results.html">перевірка результату</a>.</p>
+	  </div>`,
     pages: [
       {
         elements: [
