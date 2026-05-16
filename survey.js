@@ -1,5 +1,13 @@
 const survey = new Survey.Model();
 survey.locale = "uk";
+survey.addNavigationItem({
+  id: "reset",
+  title: "Скинути відповіді",
+  action: () => {
+    survey.clear();
+    survey.currentPageNo = 0;
+  },
+});
 document.addEventListener("DOMContentLoaded", function () {
   survey.fromJSON(surveyJson);
   restoreSurvey(survey);

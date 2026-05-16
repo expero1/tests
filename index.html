@@ -7,20 +7,53 @@
 	<title>Багаторівневий особистісний опитувальник (БОО) “Адаптивність-200”</title>
 	<!-- ... -->
 	<link href="https://unpkg.com/survey-core/survey-core.min.css" type="text/css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
 	<script type="text/javascript" src="https://unpkg.com/survey-core/survey.core.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/survey-js-ui/survey-js-ui.min.js"></script>
 	<script src="https://unpkg.com/survey-core/i18n/ukrainian.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 	<script src="constants.js"></script>
 	<script src="data.js"></script>
 	<script src="survey.js"></script>
 	<script src="interprete_2.js"></script>
-	<link href="style.css" rel="stylesheet">
+
 	<!-- ... -->
 
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href=".">Адаптивність-200</a>
+
+			<!-- Burger button -->
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Menu -->
+			<div class="collapse navbar-collapse" id="navbarMenu">
+				<ul class="navbar-nav ms-auto">
+
+					<li class="nav-item">
+						<a class="nav-link" href="/index.html">Головна сторінка</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="/results.html">Перевірити
+							результат</a>
+					</li>
+
+
+
+				</ul>
+			</div>
+
+		</div>
+	</nav>
 	<div class="container">
 		<!-- <h1>Багаторівневий особистісний опитувальник (БОО) “Адаптивність-200”</h1>
 		<p><b>Інструкція:</b> “Опитувальник складається з тверджень, що стосуються Вашого самопочуття, поведінки,
@@ -37,7 +70,7 @@
 		<!-- <iframe
 			src="https://docs.google.com/forms/d/e/1FAIpQLSfoEpeddN3XaHRtXuCD9g3urVxajPlh84TvZxhyyWFL2IG1vQ/viewform?embedded=true"
 			width="640" height="880" frameborder="0" marginheight="0" marginwidth="0">Завантаження…</iframe> -->
-		<a href="results.html" style="display: block; text-align: center; margin-top: 20px;">Перевірити результат</a>
+		<!-- <a href="results.html" style="display: block; text-align: center; margin-top: 20px;">Перевірити результат</a> -->
 	</div>
 	<script>
 		// You can add any JavaScript code here if neededconst surveyJson = {
