@@ -108,5 +108,15 @@ function saveLocalData() {
   XLSX.utils.book_append_sheet(wb, ws, "Survey Data");
   XLSX.writeFile(wb, `survey-data-${timestamp}.xlsx`);
 }
+function fillAnswers() {
+  survey.setValue("Військове звання", "Сержант");
+  survey.setValue("Прізвище, ім'я та по батькові", "Іванов Іван Іванович");
+  survey.setValue("Підрозділ", "1-й механізований батальйон");
+  survey.setValue("Згода на обробку даних", "Так");
+  for (let q of rawData) {
+    survey.setValue(q, "Ні");
+  }
+  // Заповніть інші питання за потребою
+}
 survey.onValueChanged.add(saveSurveyData);
 survey.onUIStateChanged.add(saveSurveyUIState);
