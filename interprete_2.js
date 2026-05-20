@@ -28,7 +28,10 @@ function interpretScore(score, interpretationTable) {
       score >= interpretationTable[entry].min &&
       score <= interpretationTable[entry].max
     ) {
-      return interpretationTable[entry].text;
+      return {
+        value: interpretationTable[entry].text,
+        description: interpretationTable[entry].description,
+      };
     }
   }
   return "Немає інтерпретації";
@@ -45,8 +48,12 @@ function interpretAllScores(answers, scores, interpretation) {
   return results;
 }
 
-function generateInterpretationHTML(commonInfo, interpretationResults) {
-  let html = `<table border="1" cellpadding="8" cellspacing="0" width="100%">`;
+function generateInterpretationHTML(
+  commonInfo,
+  interpretationResults,
+  showDescriptions = false,
+) {
+  let html = `<table id = "resultTable" border="1" cellpadding="8" cellspacing="0" width="100%">`;
   const common_info_fields = [
     "Військове звання",
     "Прізвище, ім'я та по батькові",
@@ -55,17 +62,19 @@ function generateInterpretationHTML(commonInfo, interpretationResults) {
   ];
   for (const field of common_info_fields) {
     html += `
-	  <tr>
+	  <tr data-name = "${field}">
     <td><b>${field}</b></td>
     <td>${commonInfo[field] || ""}</td>
   </tr>
   `;
   }
+
   for (const scaleName in interpretationResults) {
     html += `
-      <tr>
+      <tr data-name = "${scaleName}">
         <td><b>${scaleName}</b></td>
-        <td>${interpretationResults[scaleName]}</td>
+        <td><p>${interpretationResults[scaleName].value}</p>
+        ${showDescriptions && interpretationResults[scaleName].description ? interpretationResults[scaleName].description : ""}</td>
       </tr>
     `;
   }
